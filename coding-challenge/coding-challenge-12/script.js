@@ -1,9 +1,10 @@
 'use script'
 
-
+var Books = [];
 var displayResult = function (booksResult) {
 
     var tbody = document.getElementById("tbody")
+    tbody.innerHTML = ""
 
     for (var i = 0; i < booksResult.length; i++) {
         var tr = document.createElement("tr")
@@ -50,24 +51,47 @@ var searchBooks = function (books, language) {
 
 }
 
+var populateSelect = function () {
+   console.log("Select called")
+   
+    var selectLanguage = document.getElementById("selectLanguage")
+    var languageVisted = []
+    for (var i = 0; i < Books.length; i++) {
+
+        var language = Books[i].language
+        if (languageVisted.indexOf(language) != -1) {
+            continue
+        }
+        languageVisted.push(language)
+        var option = document.createElement("option")
+        option.innerText = language
+        option.value = language
+
+        selectLanguage.appendChild(option)
+    }
+
+}
+
 var loadContent = function () {
 
-    var language = document.getElementById("languageName").value;
+    
+    console.log("loadContent called")
     var request = new XMLHttpRequest();
     request.open("get", "books.json");
     request.send();
     request.onreadystatechange = function (data) {
         if (request.readyState == 4 && request.status == 200) {
-            var books = JSON.parse(request.responseText)
-            //    for(var i = 1;i<books.length;i++){
-            //     console.log(books[i].author)
-            //    }
-
-            searchBooks(books, language)
-
+            
+            Books = JSON.parse(request.responseText)
+            console.log("Books length :"+Books.length)
+            populateSelect()
+            return Books
         }
     };
 };
 
 var button = document.getElementById("search")
-button.addEventListener("click", loadContent)
+button.addEventListener("click", function(){
+    var language = document.getElementById("selectLanguage").value
+    searchBooks(Books,language)
+})
