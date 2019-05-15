@@ -16,7 +16,6 @@ var objectCounter={
     counter: 1,
 
     incrementCounter: function(){
-        console.log('incrementCounter called..')
         var value = $('#objectCounter').text()
         this.counter = value;
         this.counter++;
@@ -36,13 +35,13 @@ function closureCounter(){
         var value = $('#closureCounter').text();
         count = value;
         count++;
-        $('#closureCounter').text(count)
+        return count;
     }
     return counter;
 }
 
 //Closure Counter
+var counter = closureCounter();
 $('#closureCounterButton').click(function(){
-    var counter = closureCounter();
-    counter();
+    $('#closureCounter').text(counter())
 })
