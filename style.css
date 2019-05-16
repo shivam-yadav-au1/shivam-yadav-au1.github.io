@@ -1,0 +1,31 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.background-color{
+    /* background-image: url("old-gray-cement-wall-backgrounds_34552-324.jpg"); */
+    background-color: #F0F0F0;
+  
+}
+h3{
+    color:green;
+    size: 1rem;
+}
+h1{
+    color:green;
+    font-size: 4rem;
+    
+}
+h2{
+    color:green;
+    font-size: 3rem;
+}
+h4{
+    color: green;
+}
+.social-link a{
+    color:rgba(0,0,0,.9);
+}
+.btn-link {
+    color:black;
+}
